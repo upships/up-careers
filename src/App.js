@@ -6,11 +6,9 @@ import { Helmet } from 'react-helmet'
 import { Home , Jobs, Job, Login } from './pages'
 import AppNav from './components/interface/nav.js'
 
-import { API_ROOT_URL } from './globals'
-
 /* Axios configuration */
 
-axios.defaults.baseURL = API_ROOT_URL
+axios.defaults.baseURL = process.env.REACT_APP_API_ROOT_URL
 
 class App extends Component {
   render() {
@@ -37,8 +35,10 @@ class App extends Component {
           <AppNav />
 
           <Switch>
+
             <Route path="/jobs/:id" component={Job} />
             <Route path="/jobs" component={Jobs} />
+
             <Route path="/account/signin" component={Login} />
             <Route path="/" component={Home} exact/>
           </Switch>

@@ -1,17 +1,14 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-
+import _ from 'lodash'
 import { Link } from 'react-router-dom'
 
 import { loadJobs } from '../../actions'
 import JobListItem from './item'
-import _ from 'lodash'
+import LoadingMessage from '../interface/loader'
+
 
 class JobList extends Component {
-
-  // constructor(props) {
-  //   super(props)
-  // }
 
   componentDidMount()  {
 
@@ -27,20 +24,7 @@ class JobList extends Component {
 
     if(this.props.jobs.loading) {
 
-        return (
-          <div className="card">
-            <div className="card-content"  >
-              <p className="control" >
-                <span className="icon" >
-                  <i className="fas fa-spinner fa-spin" ></i>
-                </span>
-                <span>
-                  Loading data
-                </span>
-              </p>
-            </div>
-          </div>
-        )
+        return <LoadingMessage />
     }
 
     if(!Object.keys(this.props.jobs.list).length > 0)  {
