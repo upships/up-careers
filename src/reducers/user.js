@@ -1,4 +1,4 @@
-import { FETCH_USER } from '../actions'
+import { FETCH_USER, LOGOUT_USER } from '../actions'
 
 const user = {
   hasInfo: localStorage.getItem('userName') ? true : false,
@@ -9,6 +9,17 @@ const user = {
 export default function(state = user, action) {
 
   switch (action.type) {
+
+    case LOGOUT_USER:
+
+      localStorage.removeItem('userName')
+      localStorage.removeItem('userEmail')
+
+      return {
+        hasInfo: false,
+        name: null,
+        email: null
+      }
 
     case FETCH_USER:
 

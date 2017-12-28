@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 
 class AppMenu extends Component {
 
@@ -10,8 +10,8 @@ class AppMenu extends Component {
 
           <div className="navbar-start">
 
-            <Link className="navbar-item" to="/">Careers Home</Link>
-            <Link className="navbar-item" to="/jobs">Open jobs</Link>
+            <NavLink className="navbar-item" activeClassName="is-active" to="/">Careers Home</NavLink>
+            <NavLink className="navbar-item" activeClassName="is-active" to="/jobs">Open jobs</NavLink>
 
           </div>
     )

@@ -12,6 +12,7 @@ const setup = {
                 careers_link: "okon-glover",
                 logo_path: "/storage/images/yRYCX0qADcJSCxaOziPSHmdPDHSN5u7e5Dam2BEB.jpeg",
                 careers_url: "https://upships.com",
+                newest_jobs: {},
 
                 careers_page: {
 

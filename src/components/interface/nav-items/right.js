@@ -15,15 +15,23 @@ class RightMenu extends Component {
 
   }
 
-  renderLoginLinks()  {
+  renderAuthItems()  {
 
     if(this.props.auth.isLoggedIn) {
 
-        const accountLinkItem = (<p className="control"><span className="icon"><i className='fas fa-user'></i></span><span>Account</span></p>)
+        //const accountLinkItem = (<p className="control"><span className="icon"><i className='fas fa-user'></i></span><span>Account</span></p>)
 
         return (
           <div className="navbar-end" >
-            <Link className="navbar-item" to="/account" >{ this.props.user.hasInfo ? this.props.user.name : accountLinkItem }</Link>
+            <div className="navbar-item has-dropdown is-hoverable" >
+              <a className="navbar-link" >{ this.props.auth.name }</a>
+
+              <div className="navbar-dropdown" >
+                <Link to="/account" className="navbar-item" >Account</Link>
+                <hr className="navbar-divider" />
+                <Link to="/account/logout" className="navbar-item" >Sign out</Link>
+              </div>
+            </div>
           </div>
         )
     }
@@ -66,7 +74,7 @@ class RightMenu extends Component {
 
         {this.renderCustomMenus()}
 
-        {this.renderLoginLinks()}
+        {this.renderAuthItems()}
 
       </div>
     )

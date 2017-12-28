@@ -5,7 +5,7 @@ import { Link, Redirect } from 'react-router-dom'
 import AppHeader from '../components/interface/header'
 import LoginForm from '../components/auth/login'
 
-class Login extends Component {
+class AccountLogin extends Component {
 
   render()  {
 
@@ -62,4 +62,4 @@ function mapStateToProps(state) {
   return {auth: state.auth, app: state.app }
 }
 
-export default connect(mapStateToProps)(Login)
+export default connect(mapStateToProps)(AccountLogin)

@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { initialSetup, fetchUser } from '../../actions'
 
 import LeftMenu from './nav-items/left'
 import RightMenu from './nav-items/right'
@@ -14,20 +13,11 @@ class AppNav extends Component {
     super(props)
 
     this.state = {menuActive: false}
-
-    if(this.props.auth.isLoggedIn && !this.props.user.hasInfo)  {
-      this.props.fetchUser()
-    }
   }
 
   toggleMenu = () => {
 
     this.setState( ( prevState ) => { return { menuActive: !prevState.menuActive }})
-  }
-
-  componentDidMount()  {
-
-      this.props.initialSetup()
   }
 
   render()  {
@@ -68,7 +58,7 @@ class AppNav extends Component {
 
           <div className={`navbar-menu ${ this.state.menuActive ? 'is-active' : '' } `} >
               <LeftMenu menus={this.props.app.careers_page.menus} />
-              <RightMenu auth={this.props.auth} app={this.props.app} user={this.props.user} />
+              <RightMenu auth={this.props.auth} app={this.props.app} />
           </div>
 
         </nav>
@@ -80,4 +70,4 @@ function mapStateToProps(state)  {
   return {app: state.app, auth: state.auth, user: state.user }
 }
 
-export default connect(mapStateToProps, { initialSetup, fetchUser } )(AppNav)
+export default connect(mapStateToProps)(AppNav)

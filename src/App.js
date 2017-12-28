@@ -1,16 +1,26 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
+import { connect } from 'react-redux'
 import axios from 'axios'
 import { Helmet } from 'react-helmet'
 
-import { Home , Jobs, Job, Login } from './pages'
+import { Home , Jobs, Job, AccountLogin, AccountRegister, AccountLogout } from './pages'
 import AppNav from './components/interface/nav.js'
+import { initialSetup } from './actions'
+
+import { OnboardingPersonal, OnboardingPhone, OnboardingEducation, OnboardingCertificates, OnboardingSeafaring, OnboardingProfessional } from './pages/Onboarding'
 
 /* Axios configuration */
 
 axios.defaults.baseURL = process.env.REACT_APP_API_ROOT_URL
 
 class App extends Component {
+
+  componentWillMount()  {
+
+      this.props.initialSetup()
+  }
+
   render() {
     return (
       <BrowserRouter>
@@ -39,8 +49,19 @@ class App extends Component {
             <Route path="/jobs/:id" component={Job} />
             <Route path="/jobs" component={Jobs} />
 
-            <Route path="/account/signin" component={Login} />
+            <Route path="/account/signin" component={AccountLogin} />
+            <Route path="/account/register" component={AccountRegister} />
+            <Route path="/account/logout" component={AccountLogout} />
+
+            <Route path="/onboarding/personal" component={OnboardingPersonal} />
+            <Route path="/onboarding/phone" component={OnboardingPhone} />
+            <Route path="/onboarding/education" component={OnboardingEducation} />
+            <Route path="/onboarding/seafaring" component={OnboardingSeafaring} />
+            <Route path="/onboarding/certificates" component={OnboardingCertificates} />
+            <Route path="/onboarding/professional" component={OnboardingProfessional} />
+
             <Route path="/" component={Home} exact/>
+
           </Switch>
 
         </div>
@@ -49,4 +70,8 @@ class App extends Component {
   }
 }
 
-export default App;
+function mapStateToProps(state)  {
+  return { app: state.app, auth: state.auth }
+}
+
+export default connect(mapStateToProps, { initialSetup } )(App)

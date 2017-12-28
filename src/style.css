@@ -1,3 +1,2 @@
-.container {
-  margin-top: 65px;
-}
+@import 'bulma';
+@import '~bulma-carousel';

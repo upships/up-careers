@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import JobRequirements from './requirements'
 import JobBenefits from './benefits'
+import JobTags from './tags'
 
 class Job extends Component {
 
@@ -28,38 +29,15 @@ class Job extends Component {
             </div>
 
             <div className="level-right" >
-              <div className="field is-grouped is-grouped-multiline" >
-                <div className="control" >
-                  <div className="tag" >
-                    Posted on {job.date}
-                  </div>
-                </div>
-
-                <div className="control" >
-                  <div className="tag" >
-                    Offshore
-                  </div>
-                </div>
-
-                <div className="control" >
-                  <div className="tag" >
-                    Brazil
-                  </div>
-                </div>
-
-                <div className="control" >
-                  <div className="tag" >
-                    Vessel type: {job.ship_type.label}
-                  </div>
-                </div>
-
-              </div>
+              <JobTags job={job} />
             </div>
           </div>
 
           <div className="content" >{job.description}</div>
 
           <JobRequirements job={job} />
+
+          <JobBenefits />
 
         </div>
     )

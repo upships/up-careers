@@ -1,35 +1,40 @@
+import { AUTH_USER, LOGOUT_USER } from '../actions'
+
 import axios from 'axios'
-import { AUTH_USER } from '../actions'
+
+/* Set axios headers */
+var StorageUsed = ( localStorage.getItem('saveSessionData') ? localStorage : sessionStorage )
+axios.defaults.headers.common['Authorization'] = ( StorageUsed.getItem('accessToken') ? `Bearer ${StorageUsed.getItem('accessToken')}` : null )
+axios.defaults.headers.common['Accept'] = 'application/json'
 
 const auth = {
 
-    isLoggedIn: localStorage.getItem('accessToken') ? true : false,
-    accessToken: localStorage.getItem('accessToken'),
-    refreshToken: localStorage.getItem('refreshToken'),
-    expiresIn: localStorage.getItem('expiresIn'),
+    isLoggedIn: StorageUsed.getItem('isLoggedIn'),
+    token: StorageUsed.getItem('accessToken'),
+    name: StorageUsed.getItem('userName'),
+    email: StorageUsed.getItem('userEmail')
 }
-
-/* Set axios headers */
-
-axios.defaults.headers.common['Authorization'] = ( localStorage.getItem('accessToken') ? `Bearer ${localStorage.getItem('accessToken')}` : null )
-axios.defaults.headers.common['Accept'] = 'application/json'
 
 export default function(state = auth, action) {
 
   switch (action.type) {
+
+    case LOGOUT_USER:
+
+      return {
+        isLoggedIn: false,
+        token: null,
+        name: null,
+        email: null
+      }
+
     case AUTH_USER:
-
-      localStorage.setItem('accessToken', action.payload.data.access_token )
-      localStorage.setItem('refreshToken', action.payload.data.refresh_token )
-      localStorage.setItem('expiresIn', action.payload.data.expires_in )
-
-      axios.defaults.headers.common['Authorization'] = ( localStorage.getItem('accessToken') ? `Bearer ${localStorage.getItem('accessToken')}` : null )
 
       return {
         isLoggedIn: true,
-        accessToken: localStorage.getItem('accessToken'),
-        refreshToken: localStorage.getItem('refreshToken'),
-        expiresIn: localStorage.getItem('expiresIn'),
+        token: action.token,
+        name: action.user.name,
+        email: action.user.email,
       }
 
     default:
