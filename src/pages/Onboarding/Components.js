@@ -1,0 +1,6 @@
+export { OnboardingPersonal } from './Personal'
+export { OnboardingPhone } from './Phone'
+export { OnboardingEducation } from './Education'
+export { OnboardingSeafaring } from './Seafaring'
+export { OnboardingProfessional } from './Professional'
+export { OnboardingCertificates } from './Certificates'

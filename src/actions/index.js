@@ -6,7 +6,9 @@ export const AUTH_USER = 'AUTH_USER'
 export const LOGOUT_USER = 'LOGOUT_USER'
 export const FETCH_USER = 'FETCH_USER'
 export const LOAD_SELECTED_JOB = 'LOAD_SELECTED_JOB'
+
 export const UPDATE_PROFILE = 'UPDATE_PROFILE'
+export const LOAD_PROFILE = 'LOAD_PROFILE'
 
 export function initialSetup()  {
 
@@ -112,6 +114,15 @@ export function loadJob(job) {
   }
 }
 
+export function loadProfile() {
+
+  const request = axios.get('/api/profile')
+
+  return {
+    type: LOAD_PROFILE,
+    payload: request
+  }
+}
 
 export function updateProfile(values) {
 
