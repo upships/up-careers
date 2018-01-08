@@ -32,9 +32,6 @@ class AccountLogin extends Component {
 
         <section className="section" >
           <div className="container" >
-            <div className="notification is-primary" >
-              Don't have an account? <Link to="/account/register"  >Click here to sign up</Link>
-            </div>
 
             <div className="columns" >
 
@@ -44,6 +41,11 @@ class AccountLogin extends Component {
 
                 <LoginForm />
 
+                <hr/>
+
+                <p className="has-text-centered" >
+                  <Link to="/account/register"  >Click here to create an account</Link>
+                </p>
               </div>
             </div>
           </div>

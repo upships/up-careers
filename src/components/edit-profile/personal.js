@@ -1,117 +1,115 @@
 import React, { Component } from 'react'
 import { Field, reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
-import axios from 'axios'
 
-import { RenderInput, RenderToggler } from '../../components/interface/form'
-
+import { FormInput, FormToggler, FormSelect, FormDate } from '../../components/interface/form-inputs'
 import { updateProfile } from '../../actions'
+
+const maritalStatusLabels = [{value:0, label: 'Not informed'},{value:1, label: 'Single'},{value:2, label: 'Married'},{value:3, label: 'Divorced'},{value:4, label: 'Other'}]
+const genderLabels = [{value:0, label: 'Not informed'},{value:1, label: 'Male'},{value:2, label: 'Female'},{value:3, label: 'Other'}]
+const countriesList = [{value: 'BR', label: 'Brazil'},{value: 'US', label: 'United States'},{value: 'NO', label: 'Norway'},{value: 'UK', label: 'United Kingdom'},{value: 'IN', label: 'India'}]
+const educationLevels = [{value:0, label: 'Not informed or none'},{value:1, label: 'High school'},{value:2, label: 'College degree'},{value:3, label: 'Masters'},{value:4, label: 'Doctorate'}]
 
 class EditProfilePersonal extends Component {
 
   constructor(props)  {
     super(props)
-
     this.state = {isLoading: false}
-
   }
 
   onSubmit(values) {
 
     this.setState({isLoading: true})
-
-    axios.post('/api/profile/update', values).then(
-
-        () => { this.props.updateProfile(values) }
-    )
+    this.props.updateProfile(values, () => {this.setState({isLoading: false})}, this.props.mode)
   }
 
   render()  {
 
     const { profile } = this.props
     const { handleSubmit } = this.props
+    //const stepField = this.props.mode === 'onboarding' ? <Field name="onboarding" component={FormInput} type="" value="1" /> : null
 
     return (
-            <form onSubmit={ handleSubmit(this.onSubmit.bind(this))} >
+            <div>
+
+              <form onSubmit={ handleSubmit(this.onSubmit.bind(this))} >
 
 
-              <Field
-                name="name"
-                label="Name"
-                type="text"
-                placeholder="First and last name"
-                value={profile.name}
-                component={RenderInput}
-              />
 
-              <Field
-                name="gender"
-                label="Gender"
-                type="text"
-                placeholder="Gender"
-                value={profile.gender}
-                component={RenderInput}
-              />
+                <Field
+                  name="gender"
+                  label="Gender"
+                  type="text"
+                  placeholder="Gender"
+                  options={genderLabels}
+                  component={FormSelect}
+                />
 
-              <Field
-                name="birthday"
-                label="Birthday"
-                type="text"
-                placeholder="Birthday"
-                value={profile.birthday}
-                component={RenderInput}
-              />
+                <Field
+                  name="birthday"
+                  label="Birthday"
+                  type="text"
+                  placeholder="Birthday"
 
-              <Field
-                name="marital_status"
-                label="Marital Status"
-                type="text"
-                placeholder="Marital status"
-                value={profile.marital_status}
-                component={RenderInput}
-              />
+                  component={FormDate}
+                />
 
-              <Field
-                name="country"
-                label="Country"
-                type="text"
-                placeholder="Country"
-                value={profile.country}
-                component={RenderInput}
-              />
-              <Field
-                name="state"
-                label="State"
-                type="text"
-                placeholder="State"
-                value={profile.state}
-                component={RenderInput}
-              />
-              <Field
-                name="city"
-                label="City"
-                type="text"
-                placeholder="City"
-                value={profile.city}
-                component={RenderInput}
-              />
+                <Field
+                  name="marital_status"
+                  label="Marital Status"
+                  type="text"
+                  options={maritalStatusLabels}
+                  component={FormSelect}
+                />
 
-              <Field
-                name="address"
-                label="Address"
-                type="text"
-                placeholder="Address"
-                value={profile.address}
-                component={RenderInput}
-              />
+                <Field
+                  name="education_level"
+                  label="Highest education level"
+                  type="text"
+                  options={educationLevels}
+                  component={FormSelect}
+                />
 
-              <div className="field is-grouped">
-                <div className="control">
-                  <button className={`button is-link is-medium ${ this.state.isLoading ? 'is-loading' : null }` }>Save & Advance</button>
+                <Field
+                  name="country_id"
+                  label="Country"
+                  type="text"
+                  options={countriesList}
+                  component={FormSelect}
+                />
+
+                <Field
+                  name="state"
+                  label="State"
+                  type="text"
+                  placeholder="State"
+                  component={FormInput}
+                />
+
+                <Field
+                  name="city"
+                  label="City"
+                  type="text"
+                  placeholder="City"
+                  component={FormInput}
+                />
+
+                <Field
+                  name="address"
+                  label="Address"
+                  type="text"
+                  placeholder="Address (optional)"
+                  component={FormInput}
+                />
+
+                <div className="field is-grouped">
+                  <div className="control">
+                    <button className={`button is-link is-medium ${ this.state.isLoading ? 'is-loading' : null }` }>Save information</button>
+                  </div>
                 </div>
-              </div>
 
-            </form>
+              </form>
+            </div>
           )
   }
 }
@@ -146,12 +144,12 @@ function validate(values) {
   return errors
 }
 
+EditProfilePersonal = reduxForm({ validate, form: 'EditProfilePersonalForm' })(EditProfilePersonal)
+
 function mapStateToProps(state) {
-  return {profile: state.profile}
+  return {profile: state.profile, initialValues: state.profile}
 }
 
-export default reduxForm({ validate, form: 'EditProfilePersonalForm' })(
+EditProfilePersonal = connect(mapStateToProps, {updateProfile})(EditProfilePersonal)
 
-  connect(mapStateToProps, { updateProfile })(EditProfilePersonal)
-
-)
+export default EditProfilePersonal

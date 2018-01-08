@@ -26,22 +26,22 @@ class AppNav extends Component {
 
         <nav className="navbar">
 
-        <Helmet>
+          <Helmet>
 
-          <title>{`${this.props.app.name} Careers Portal`}</title>
+            <title>{`${this.props.app.name} Careers Portal`}</title>
 
-          <meta name="author" content={`UpShips Technology for ${this.props.app.name}`} />
-          <meta name="keywords" content={`${this.props.app.name}, Careers, Maritime, Shipping`} />
-          <meta name="description" content={`Careers portal for ${this.props.app.name}.`} />
+            <meta name="author" content={`UpShips Technology for ${this.props.app.name}`} />
+            <meta name="keywords" content={`${this.props.app.name}, Careers, Maritime, Shipping`} />
+            <meta name="description" content={`Careers portal for ${this.props.app.name}.`} />
 
-          <link rel="shortcut icon" href={this.props.app.favicon_url} />
+            <link rel="shortcut icon" href={this.props.app.favicon_url} />
 
-          <meta property="og:title" content="Aliança" />
-          <meta property="og:description" content={`${this.props.app.name} Careers Page`} />
-          <meta property="og:type" content="article" />
-          <meta property="og:url" content={this.props.app.careers_url} />
+            <meta property="og:title" content="Aliança" />
+            <meta property="og:description" content={`${this.props.app.name} Careers Page`} />
+            <meta property="og:type" content="article" />
+            <meta property="og:url" content={this.props.app.careers_url} />
 
-        </Helmet>
+          </Helmet>
 
           <div className="navbar-brand" >
             <Link to="/" className="navbar-item" >

@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import { connect } from 'react-redux'
 import axios from 'axios'
 import { Helmet } from 'react-helmet'
 
 import ProtectedRoute from './components/protected-routes'
 import AppNav from './components/interface/nav.js'
+import AppMessages from './components/interface/notifications'
+
 import { initialSetup } from './actions'
 
 import { Home , Jobs, Job, AccountLogin, AccountRegister, AccountLogout } from './pages'
@@ -49,6 +51,7 @@ class App extends Component {
           {this.renderHelmet()}
 
           <AppNav />
+          <AppMessages />
 
           <Switch>
 

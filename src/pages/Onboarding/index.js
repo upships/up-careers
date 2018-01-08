@@ -10,9 +10,9 @@ import OnboardingSteps from './Steps'
 import EditProfilePersonal from '../../components/edit-profile/personal'
 import EditProfilePhone from '../../components/edit-profile/phone'
 import EditProfileCertificates from '../../components/edit-profile/certificates'
-import EditProfileEducation from '../../components/edit-profile/education'
+import OnboardingEducation from './Education'
 import EditProfileProfessional from '../../components/edit-profile/professional'
-import EditProfileSeafaring from '../../components/edit-profile/seafaring'
+import OnboardingSeafaring from './Seafaring'
 
 class Onboarding extends Component {
 
@@ -24,22 +24,22 @@ class Onboarding extends Component {
 
     const { registration_step } = this.props.profile
 
-    switch(registration_step)  {
-      case 1:
-        return <EditProfilePersonal />
-      case 2:
-        return <EditProfilePhone />
-      case 3:
-        return <EditProfileCertificates />
-      case 4:
-        return <EditProfileEducation />
-      case 5:
-        return <EditProfileProfessional />
-      case 6:
-        return <EditProfileSeafaring />
+    switch(parseInt(registration_step, 10))  {
 
+      case 0:
+        return <EditProfilePhone mode="onboarding" />
+      case 1:
+        return <EditProfilePersonal mode="onboarding" />
+      case 2:
+        return <OnboardingEducation />
+      case 3:
+        return <OnboardingSeafaring />
+      case 4:
+        return <EditProfileCertificates mode="onboarding" />
+      case 5:
+        return <EditProfileProfessional mode="onboarding" />
       default:
-        return <EditProfilePersonal />
+        return <EditProfilePhone mode="onboarding" />
     }
   }
 
@@ -47,11 +47,11 @@ class Onboarding extends Component {
 
     const { profile } = this.props
 
-    if(!profile)  {
-      return <LoadingMessage />
+    if(!Object.keys(profile).length > 0)  {
+        return <LoadingMessage />
     }
 
-    if(profile.complete)  {
+    if(profile.complete || profile.registration_step === 10)  {
       return <Redirect to="/profile" />
     }
 
@@ -59,7 +59,7 @@ class Onboarding extends Component {
       <section className="section" >
         <div className="container" >
 
-          <OnboardingSteps />
+          <OnboardingSteps currentStep={profile.registration_step} />
 
           {this.renderCurrentStep()}
 

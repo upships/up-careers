@@ -32,9 +32,6 @@ class AccountRegister extends Component {
 
         <section className="section" >
           <div className="container" >
-            <div className="notification is-primary" >
-              Already have an account? <Link to="/account/signin"  >Click here to sign in</Link>
-            </div>
 
             <div className="columns" >
 
@@ -43,6 +40,12 @@ class AccountRegister extends Component {
                 <h2 className="title" >Email &amp; password</h2>
 
                 <RegistrationForm />
+
+                <hr/>
+                
+                <p className="has-text-centered" >
+                  Already have an account?<Link to="/account/signin"  >Click here to log in</Link>
+                </p>
 
               </div>
             </div>

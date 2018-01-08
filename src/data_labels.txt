@@ -1,0 +1,13 @@
+Marital Status Label
+
+0:Not informed
+1:Single
+2:Married
+3:Divorced
+4:Other
+
+Gender Label
+0:Not informed
+1:Male
+2:Female
+3:Other

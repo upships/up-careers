@@ -5,10 +5,9 @@ import { RenderInput, RenderToggler } from '../interface/form'
 import { authUser } from '../../actions'
 
 class LoginForm extends Component {
-
   onSubmit(values) {
 
-    this.props.authUser(values, () => {})
+    this.props.authUser(values)
   }
 
   render()  {

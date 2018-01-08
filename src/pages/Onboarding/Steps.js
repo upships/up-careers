@@ -1,19 +1,52 @@
 import React, { Component } from 'react'
 import 'bulma-extensions/bulma-steps/bulma-steps.min.css'
 //import 'bulma-extensions/bulma-steps/steps.min.js'
+import _ from 'lodash'
+
+const steps = [
+  {step: 1, title: 'Basic', description: 'Personal and contact info.'},
+  {step: 2, title: 'Education', description: 'Degrees and qualifications.'},
+  {step: 3, title: 'Seafaring', description: 'STCW, COEs, and more.'},
+  {step: 4, title: 'Certification', description: 'Certificates and more'},
+  {step: 5, title: 'Professional', description: 'Work experience'},
+]
 
 export default class OnboardingSteps extends Component {
 
   renderStepClass(step) {
 
-    const {currentStep} = this.props
+    const { currentStep } = this.props
 
-    if(step < currentStep) {
+    if(parseInt(step, 10) < parseInt(currentStep, 10)) {
       return 'is-completed'
     }
-    else if(step === currentStep)  {
+    else if(parseInt(step, 10) === parseInt(currentStep, 10))  {
       return 'is-active'
     }
+  }
+
+  renderStepIcon(step)  {
+    const {currentStep} = this.props
+    return step < currentStep ? <span className="icon"><i className="fa fa-check"></i></span> : null
+  }
+
+  renderSteps() {
+
+    const key = Math.ceil(Math.random() * 1000)
+
+    return _.map(steps, ({step, title, description}) => {
+      return (
+        <div key={`key-${step}`} className={`step-item ${this.renderStepClass(step)}`}>
+          <div className="step-marker">
+            {this.renderStepIcon(step)}
+          </div>
+          <div className="step-details">
+            <p className="step-title">{title}</p>
+            <p>{description}</p>
+          </div>
+        </div>
+      )
+    })
   }
 
   render()  {
@@ -21,43 +54,8 @@ export default class OnboardingSteps extends Component {
     const {currentStep} = this.props
 
     return (
-      <div className="steps">
-        <div className={`step-item is-completed ${this.renderStepClass(1)}`}>
-          <div className="step-marker">
-            <span className="icon">
-              <i className="fa fa-check"></i>
-            </span>
-          </div>
-          <div className="step-details">
-            <p className="step-title">Basic</p>
-            <p>Personal information</p>
-          </div>
-        </div>
-        <div className="step-item is-active">
-          <div className="step-marker"></div>
-          <div className="step-details">
-            <p className="step-title">Step 2</p>
-            <p>This is the second step. You get here once you have completed the first step.</p>
-          </div>
-        </div>
-        <div className="step-item">
-          <div className="step-marker">3</div>
-          <div className="step-details">
-            <p className="step-title">Step 3</p>
-            <p>This is the third step. One more last before the end.</p>
-          </div>
-        </div>
-        <div className="step-item">
-          <div className="step-marker">
-            <span className="icon">
-              <i className="fa fa-flag"></i>
-            </span>
-          </div>
-          <div className="step-details">
-            <p className="step-title">Step 4</p>
-            <p>Final step. You have completed all the previous steps and end the process.</p>
-          </div>
-        </div>
+      <div className="steps is-hidden-mobile">
+        {this.renderSteps()}
       </div>
     )
   }

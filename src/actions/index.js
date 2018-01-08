@@ -6,9 +6,39 @@ export const AUTH_USER = 'AUTH_USER'
 export const LOGOUT_USER = 'LOGOUT_USER'
 export const FETCH_USER = 'FETCH_USER'
 export const LOAD_SELECTED_JOB = 'LOAD_SELECTED_JOB'
-
 export const UPDATE_PROFILE = 'UPDATE_PROFILE'
 export const LOAD_PROFILE = 'LOAD_PROFILE'
+export const ADD_NOTIFICATION = 'ADD_NOTIFICATION'
+export const DELETE_NOTIFICATION = 'DELETE_NOTIFICATION'
+export const CLEAR_NOTIFICATIONS = 'CLEAR_NOTIFICATIONS'
+
+export const ADD_PROFILE_EDUCATION = 'ADD_PROFILE_EDUCATION'
+
+export function addNotification(message, type = 'is-info')  {
+
+  const id = Math.floor(Math.random() * 10000)
+  const notification = { id, message, type }
+
+  return {
+    type: ADD_NOTIFICATION,
+    payload: notification
+  }
+}
+
+export function deleteNotification(id) {
+
+  return {
+    type: DELETE_NOTIFICATION,
+    payload: id
+  }
+}
+
+export function clearNotifications() {
+
+  return {
+    type: CLEAR_NOTIFICATIONS
+  }
+}
 
 export function initialSetup()  {
 
@@ -73,12 +103,14 @@ export function authUser(values)  {
                 user: response.data,
                 values: values
               })
-
             }
-
           )
-      }
+      },
 
+      (response) => {
+
+          dispatch(addNotification(response.message, 'is-danger'))
+      }
     )
   }
 }
@@ -116,18 +148,67 @@ export function loadJob(job) {
 
 export function loadProfile() {
 
-  const request = axios.get('/api/profile')
-
-  return {
-    type: LOAD_PROFILE,
-    payload: request
+  return dispatch => {
+    axios.get('/api/profile').then(
+      response => dispatch({type: LOAD_PROFILE, payload: response.data}),
+      response => {dispatch(addNotification(response.message, 'is-danger'))}
+    )
   }
 }
 
-export function updateProfile(values) {
+export function updateProfile(values, callback, mode = null) {
 
-  return {
-    type: UPDATE_PROFILE,
-    payload: values
+  return dispatch => {
+
+    const modeQueryParam = mode ? `?mode=${mode}` : ''
+    const url = `/api/profile${modeQueryParam}`
+
+    axios.patch(url, values).then(
+        response => {
+                callback()
+                dispatch({type: LOAD_PROFILE, payload: response.data})
+              },
+        response => {
+              callback()
+              dispatch(addNotification(response.message, 'is-danger'))
+        }
+    )
+  }
+}
+
+export function addProfileItem(values, item, callback = null) {
+
+  return dispatch => {
+
+    const url = `/api/profile/${item}`
+
+    axios.post(url, values).then(
+
+        response => {
+                callback?callback():null
+                dispatch({ type: LOAD_PROFILE, payload: response.data})
+              },
+        response => {
+              callback?callback():null
+              dispatch(addNotification(response.message, 'is-danger'))
+        }
+    )
+  }
+}
+
+export function updateProfileCoc(values, callback) {
+
+  return dispatch => {
+    const url = '/api/profile/coc'
+    axios.patch(url, values).then(
+        response => {
+                callback()
+                dispatch({ type: LOAD_PROFILE, payload: response.data})
+              },
+        response => {
+              callback()
+              dispatch(addNotification(response.message, 'is-danger'))
+        }
+    )
   }
 }

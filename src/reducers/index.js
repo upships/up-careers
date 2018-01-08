@@ -5,6 +5,7 @@ import InitialSetup from './setup'
 import LoadJobs from './jobs'
 import Auth from './auth'
 import Profile from './profile'
+import AppNotifications from './notifications'
 
 const rootReducer = combineReducers({
 
@@ -12,7 +13,8 @@ const rootReducer = combineReducers({
     jobs: LoadJobs,
     auth: Auth,
     form: formReducer,
-    profile: Profile
+    profile: Profile,
+    notifications: AppNotifications
 })
 
 export default rootReducer
