@@ -8,8 +8,7 @@ export default function CoeList({dp})  {
     return (
       <div className="card" key={`dp-item-${item.id}`} >
         <div className="card-content" >
-          <h5 className="title">{item.dp_type.label}</h5>
-          Expires in {dp.expiration_date}
+          {item.dp_type.label}
         </div>
       </div>
     )

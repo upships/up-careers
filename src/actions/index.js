@@ -12,8 +12,6 @@ export const ADD_NOTIFICATION = 'ADD_NOTIFICATION'
 export const DELETE_NOTIFICATION = 'DELETE_NOTIFICATION'
 export const CLEAR_NOTIFICATIONS = 'CLEAR_NOTIFICATIONS'
 
-export const ADD_PROFILE_EDUCATION = 'ADD_PROFILE_EDUCATION'
-
 export function addNotification(message, type = 'is-info')  {
 
   const id = Math.floor(Math.random() * 10000)
@@ -165,7 +163,7 @@ export function updateProfile(values, callback, mode = null) {
 
     axios.patch(url, values).then(
         response => {
-                callback()
+                callback?callback():null
                 dispatch({type: LOAD_PROFILE, payload: response.data})
               },
         response => {

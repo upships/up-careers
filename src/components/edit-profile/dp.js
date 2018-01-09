@@ -5,10 +5,8 @@ import { connect } from 'react-redux'
 import { FormInput, FormToggler, FormSelect, FormDate } from '../../components/interface/form-inputs'
 import { addProfileItem } from '../../actions'
 
-import CoeList from '../profile/dp-list'
-
-const ranks = [{value:1, label: 'Master'},{value:2, label: 'Chief Mate'},{value:3, label: 'Second Mate'},{value:4, label: 'Third Mate'}]
-const countriesList = [{value: 1, label: 'Brazil'},{value: 2, label: 'United States'},{value: 3, label: 'Norway'},{value: 4, label: 'United Kingdom'},{value: 5, label: 'India'}]
+import DpList from '../profile/dp-list'
+const dpTypesList = [{value: 1, label: 'Basic'},{value: 2, label: 'Limited'},{value: 3, label: 'Unlimited Offshore'},{value: 4, label: 'Shuttle Tanker'}]
 
 class EditProfileCoe extends Component {
 
@@ -25,7 +23,7 @@ class EditProfileCoe extends Component {
 
   render()  {
 
-    const { dps } = this.props
+    const { dp } = this.props
     const { handleSubmit } = this.props
 
     return (
@@ -33,7 +31,7 @@ class EditProfileCoe extends Component {
               <div className="content" >
                 <div className="card" >
                   <div className="card-header" >
-                    <p className="card-header-title" >Add CoEs</p>
+                    <p className="card-header-title" >Add Dynamic Positioning</p>
                   </div>
                   <div className="card-content" >
 
@@ -51,15 +49,6 @@ class EditProfileCoe extends Component {
 
                         <div className="column" >
                           <Field
-                            name="rank_id"
-                            label="Rank *"
-                            options={ranks}
-                            component={FormSelect}
-                          />
-                        </div>
-
-                        <div className="column" >
-                          <Field
                             name="issued_at"
                             label="Issued at"
                             type="text"
@@ -70,18 +59,6 @@ class EditProfileCoe extends Component {
 
                         <div className="column" >
                           <Field
-                            name="expires_at"
-                            label="Expires at *"
-                            type="text"
-                            placeholder="Expiration date"
-                            component={FormDate}
-                          />
-                        </div>
-                      </div>
-
-                      <div className="columns" >
-                        <div className="column" >
-                          <Field
                             name="number"
                             label="Document number"
                             type="text"
@@ -90,15 +67,6 @@ class EditProfileCoe extends Component {
                           />
                         </div>
 
-                        <div className="column" >
-                          <Field
-                            name="remarks"
-                            label="Remarks"
-                            type="text"
-                            placeholder="Remarks"
-                            component={FormInput}
-                          />
-                        </div>
                       </div>
 
                       <div className="field is-grouped">
@@ -112,9 +80,9 @@ class EditProfileCoe extends Component {
               </div>
 
               <div className="content" >
-                <h4 className="title" >Existing CoEs</h4>
+                <h4 className="title" >Existing DP</h4>
 
-                <CoeList dps={dps} />
+                <DpList dp={dp} />
 
               </div>
 
@@ -136,7 +104,7 @@ function validate(values) {
 EditProfileCoe = reduxForm({ validate, form: 'EditProfileCoEForm' })(EditProfileCoe)
 
 function mapStateToProps(state) {
-  return {dps: state.profile.dps}
+  return {dp: state.profile.dp}
 }
 
 EditProfileCoe = connect(mapStateToProps, {addProfileItem})(EditProfileCoe)

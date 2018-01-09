@@ -5,14 +5,10 @@ import axios from 'axios'
 
 import { FormInput, FormSelect } from '../../components/interface/form-inputs'
 import { updateProfile, addNotification } from '../../actions'
+import LoadingMessage from '../interface/loader'
 
-const countriesList = [
-                        {value: 'BR', label: 'Brazil', phoneCode: 55},
-                        {value: 'US', label: 'United States', phoneCode: 1},
-                        {value: 'NO', label: 'Norway', phoneCode: 43},
-                        {value: 'UK', label: 'United Kingdom', phoneCode: 44},
-                        {value: 'IN', label: 'India', phoneCode: 33}
-                      ]
+import EditProfilePhoneNumber from './phone-number'
+import EditProfilePhoneValidation from './phone-validation'
 
 class EditProfilePhone extends Component {
 
@@ -21,90 +17,33 @@ class EditProfilePhone extends Component {
     this.state = {isLoading: false, step: 'get_phone'}
   }
 
-  onSubmit(values) {
-    const modeQueryParam = this.props.mode ? `?mode=${this.props.mode}` : ''
-    const url = `/api/profile${modeQueryParam}`
-
-    this.setState({isLoading: true, step: 'sending_phone'})
-
-    axios.patch(url, values).then(
-
-        response => {
-
-                this.setState({isLoading: false, step: 'get_code'})
-                this.props.updateProfile(response.data)
-              },
-        response => {
-          this.setState({isLoading: false, step: 'get_phone'})
-          this.props.addNotification(response.message, 'is-danger')
-        }
-    )
-  }
-
-  renderGetPhoneForm()  {
-
-    return (
-            <div>
-              <p>
-                We will send you a code to validate your phone number.
-              </p>
-
-              <Field
-                name="country_id"
-                label="Country"
-                type="text"
-                options={countriesList}
-                component={FormSelect}
-              />
-
-              <Field
-                name="phone"
-                label="Phone number"
-                type="text"
-                placeholder="Numbers only"
-                component={FormInput}
-              />
-
-              <div className="field is-grouped">
-                <div className="control">
-                  <button className={`button is-link ${ this.state.isLoading ? 'is-loading' : null }` }>Save phone</button>
-                </div>
-              </div>
-            </div>
-          )
-  }
-
-  renderGetCodeForm() {
-    return (
-            <div>
-              <p>Please validate your phone number</p>
-
-              <Field
-                name="code"
-                label="Code"
-                placeholder="Code received"
-                type="text"
-                component={FormInput}
-              />
-
-              <div className="field is-grouped">
-                <div className="control">
-                  <button className={`button is-link ${ this.state.isLoading ? 'is-loading' : null }` }>Validate code</button>
-                </div>
-              </div>
-            </div>
-          )
-  }
-
-  renderForms() {
+  renderSteps() {
 
     switch(this.state.step) {
       case 'get_phone':
-        return this.renderGetPhoneForm()
+        return <EditProfilePhoneNumber changePhoneValidationStatus={ (step) => this.setState({step: step}) }  />
+
+      case 'sending_phone':
+        return <LoadingMessage />
+
+      case 'sending_code':
+        return <LoadingMessage />
+
       case 'get_code':
-        return this.renderGetCodeForm()
+        return <EditProfilePhoneValidation changePhoneValidationStatus={ (step) => this.setState({step: step}) } />
+
+      case 'phone_validated':
+
+        this.props.updateProfile()
+
+        return (
+          <div className="notification is-success" >
+            Phone validated!
+          </div>
+        )
+
       default:
-        return this.renderGetPhoneForm()
+        return <EditProfilePhoneNumber changePhoneValidationStatus={ (step) => this.setState({step: step}) } />
     }
   }
 
@@ -115,32 +54,15 @@ class EditProfilePhone extends Component {
     return (
 
       <div>
-        <form onSubmit={ handleSubmit(this.onSubmit.bind(this))} >
-          {this.renderForms()}
-        </form>
+        <h4 className="title is-4" >Phone number validation</h4>
+        {this.renderSteps()}
       </div>
     )
   }
 }
 
-function validate(values) {
-  const errors = {}
-
-  if(!values.phone) {
-    errors.phone = "Please insert your phone number"
-  }
-
-  if(!values.country_id) {
-    errors.country_id = "Please select your country"
-  }
-
-  return errors
-}
-
 function mapStateToProps(state) {
-  return {profile: state.profile, initialValues: state.profile}
+  return {profile: state.profile}
 }
 
-export default reduxForm({ validate, form: 'EditProfilePhoneForm' })(
-  connect(mapStateToProps, {updateProfile, addNotification})(EditProfilePhone)
-)
+export default connect(mapStateToProps, {updateProfile, addNotification})(EditProfilePhone)
