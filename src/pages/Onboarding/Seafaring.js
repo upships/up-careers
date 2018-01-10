@@ -69,8 +69,7 @@ class OnboardingSeafaring extends Component {
       case 3: // DP
         return (
           <div>
-            <h2 className="title is-4" >Dynamic Positioning</h2>
-
+            <EditProfileDp />
           </div>
         )
     }
@@ -82,7 +81,12 @@ class OnboardingSeafaring extends Component {
       <div >
         {this.renderTabs()}
 
-        {this.renderContent()}
+        <div className="content" >
+          {this.renderContent()}
+        </div>
+        <div className="content" >
+          <button className="button is-medium is-success" >Save and continue</button> 
+        </div>
       </div>
     )
   }

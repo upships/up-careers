@@ -34,80 +34,99 @@ class EditProfilePersonal extends Component {
 
               <form onSubmit={ handleSubmit(this.onSubmit.bind(this))} >
 
+                <div className="card" >
+                  <div className="card-content" >
+                    <div className="columns" >
+                      <div className="column" >
+                        <Field
+                          name="gender"
+                          label="Gender"
+                          type="text"
+                          placeholder="Gender"
+                          options={genderLabels}
+                          component={FormSelect}
+                        />
+                      </div>
 
+                      <div className="column" >
+                        <Field
+                          name="birthday"
+                          label="Birthday"
+                          type="text"
+                          placeholder="Birthday"
 
-                <Field
-                  name="gender"
-                  label="Gender"
-                  type="text"
-                  placeholder="Gender"
-                  options={genderLabels}
-                  component={FormSelect}
-                />
+                          component={FormDate}
+                        />
+                      </div>
 
-                <Field
-                  name="birthday"
-                  label="Birthday"
-                  type="text"
-                  placeholder="Birthday"
+                      <div className="column" >
+                        <Field
+                          name="marital_status"
+                          label="Marital Status"
+                          type="text"
+                          options={maritalStatusLabels}
+                          component={FormSelect}
+                        />
+                      </div>
 
-                  component={FormDate}
-                />
+                      <div className="column" >
+                        <Field
+                          name="education_level"
+                          label="Highest education level"
+                          type="text"
+                          options={educationLevels}
+                          component={FormSelect}
+                        />
+                      </div>
+                    </div>
+                    <div className="columns" >
+                      <div className="column" >
+                        <Field
+                          name="country_id"
+                          label="Country"
+                          type="text"
+                          options={countriesList}
+                          component={FormSelect}
+                        />
+                      </div>
+                      <div className="column" >
+                        <Field
+                          name="state"
+                          label="State"
+                          type="text"
+                          placeholder="State"
+                          component={FormInput}
+                        />
+                      </div>
+                      <div className="column" >
+                        <Field
+                          name="city"
+                          label="City"
+                          type="text"
+                          placeholder="City"
+                          component={FormInput}
+                        />
+                      </div>
+                      <div className="column" >
 
-                <Field
-                  name="marital_status"
-                  label="Marital Status"
-                  type="text"
-                  options={maritalStatusLabels}
-                  component={FormSelect}
-                />
+                        <Field
+                          name="address"
+                          label="Address"
+                          type="text"
+                          placeholder="Address (optional)"
+                          component={FormInput}
+                        />
 
-                <Field
-                  name="education_level"
-                  label="Highest education level"
-                  type="text"
-                  options={educationLevels}
-                  component={FormSelect}
-                />
-
-                <Field
-                  name="country_id"
-                  label="Country"
-                  type="text"
-                  options={countriesList}
-                  component={FormSelect}
-                />
-
-                <Field
-                  name="state"
-                  label="State"
-                  type="text"
-                  placeholder="State"
-                  component={FormInput}
-                />
-
-                <Field
-                  name="city"
-                  label="City"
-                  type="text"
-                  placeholder="City"
-                  component={FormInput}
-                />
-
-                <Field
-                  name="address"
-                  label="Address"
-                  type="text"
-                  placeholder="Address (optional)"
-                  component={FormInput}
-                />
-
-                <div className="field is-grouped">
-                  <div className="control">
-                    <button className={`button is-link is-medium ${ this.state.isLoading ? 'is-loading' : null }` }>Save information</button>
+                      </div>
+                    </div>
+                    
+                    <div className="field is-grouped">
+                      <div className="control">
+                        <button className={`button is-link is-medium ${ this.state.isLoading ? 'is-loading' : null }` }>Save information</button>
+                      </div>
+                    </div>
                   </div>
                 </div>
-
               </form>
             </div>
           )

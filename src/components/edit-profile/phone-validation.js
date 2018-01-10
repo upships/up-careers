@@ -24,7 +24,6 @@ class EditProfilePhoneValidation extends Component {
     axios.patch(url, values).then(
 
         response => {
-                this.setState({isLoading: false})
                 this.props.changePhoneValidationStatus('phone_validated')
               },
         response => {
@@ -69,7 +68,7 @@ class EditProfilePhoneValidation extends Component {
 
 function validate(values) {
   const errors = {}
-  if(!values.phone) {
+  if(!values.code) {
     errors.code = "Please insert a code"
   }
   return errors

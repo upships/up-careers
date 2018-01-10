@@ -29,59 +29,63 @@ class EditProfileEducation extends Component {
     return (
             <div>
               <div className="content" >
-                <h4 className="title" >Add items</h4>
+                <div className="card" >
+                  <div className="card-content" >
+                    <h4 className="title" >Add education</h4>
 
-                <form onSubmit={ handleSubmit(this.onSubmit.bind(this))} >
-                  <div className="columns" >
-                    <div className="column" >
-                      <Field
-                        name="label"
-                        label="Degree or course"
-                        type="text"
-                        placeholder="Degree or course"
-                        component={FormInput}
-                      />
-                    </div>
-                    <div className="column" >
-                      <Field
-                        name="school"
-                        label="School"
-                        type="text"
-                        placeholder="School"
-                        component={FormInput}
-                      />
-                    </div>
+                    <form onSubmit={ handleSubmit(this.onSubmit.bind(this))} >
+                      <div className="columns" >
+                        <div className="column" >
+                          <Field
+                            name="label"
+                            label="Degree or course"
+                            type="text"
+                            placeholder="Degree or course"
+                            component={FormInput}
+                          />
+                        </div>
+                        <div className="column" >
+                          <Field
+                            name="school"
+                            label="School"
+                            type="text"
+                            placeholder="School"
+                            component={FormInput}
+                          />
+                        </div>
 
-                    <div className="column" >
-                      <Field
-                        name="start_year"
-                        label="Start year"
-                        type="text"
-                        placeholder="Start year"
-                        component={FormInput}
-                      />
-                    </div>
+                        <div className="column" >
+                          <Field
+                            name="start_year"
+                            label="Start year"
+                            type="text"
+                            placeholder="Start year"
+                            component={FormInput}
+                          />
+                        </div>
 
-                    <div className="column" >
-                      <Field
-                        name="end_year"
-                        label="End year"
-                        type="text"
-                        placeholder="End year"
-                        component={FormInput}
-                      />
-                    </div>
+                        <div className="column" >
+                          <Field
+                            name="end_year"
+                            label="End year"
+                            type="text"
+                            placeholder="End year"
+                            component={FormInput}
+                          />
+                        </div>
+                      </div>
+                      <div className="field is-grouped">
+                        <div className="control">
+                          <button className={`button is-primary ${ this.state.isLoading ? 'is-loading' : null }` }>Insert education</button>
+                        </div>
+                      </div>
+                    </form>
                   </div>
-                  <div className="field is-grouped">
-                    <div className="control">
-                      <button className={`button is-primary ${ this.state.isLoading ? 'is-loading' : null }` }>Insert education</button>
-                    </div>
-                  </div>
-                </form>
+                </div>
               </div>
 
               <div className="content" >
-                <h4 className="title" >Education</h4>
+                <h4 className="title" >Existing education</h4>
 
                 <EducationList education={profile.education} />
 

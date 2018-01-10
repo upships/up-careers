@@ -31,7 +31,7 @@ class Onboarding extends Component {
       case 1:
         return <EditProfilePersonal mode="onboarding" />
       case 2:
-        return <OnboardingEducation />
+        return <OnboardingEducation mode="onboarding" />
       case 3:
         return <OnboardingSeafaring />
       case 4:

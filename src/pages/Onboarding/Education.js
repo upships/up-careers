@@ -7,20 +7,24 @@ class OnboardingEducation extends Component {
 
   constructor(props)  {
       super(props)
+      this.state = {isLoading: false}
   }
 
   render()  {
 
     return (
       <div >
-        <EditProfileEducation mode="onboarding" />
-
-        <div className="field is-grouped">
-          <div className="control">
-            <button className={`button is-link is-medium ${ this.state.isLoading ? 'is-loading' : null }` } onClick={() => this.props.updateProfile(null, () => {this.setState({isLoading: false})}, this.props.mode)} >Save information</button>
-          </div>
+        <div className="content" >
+          <EditProfileEducation mode="onboarding" />
         </div>
 
+        <div className="content" >
+          <div className="field is-grouped">
+            <div className="control">
+              <button className={`button is-link is-medium ${ this.state.isLoading ? 'is-loading' : null }` } onClick={() => this.props.updateProfile(null, () => {this.setState({isLoading: false})}, this.props.mode)} >Save information</button>
+            </div>
+          </div>
+        </div>
       </div>
     )
   }

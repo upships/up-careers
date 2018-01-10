@@ -6,7 +6,7 @@ import { FormInput, FormToggler, FormSelect, FormDate } from '../../components/i
 import { updateProfileCoc } from '../../actions'
 
 const ranks = [{value:1, label: 'Master'},{value:2, label: 'Chief Mate'},{value:3, label: 'Second Mate'},{value:4, label: 'Third Mate'}]
-const countriesList = [{value: 'BR', label: 'Brazil'},{value: 'US', label: 'United States'},{value: 'NO', label: 'Norway'},{value: 'UK', label: 'United Kingdom'},{value: 'IN', label: 'India'}]
+const countriesList = [{value: 1, label: 'Brazil'},{value: 2, label: 'United States'},{value: 3, label: 'Norway'},{value: 4, label: 'United Kingdom'},{value: 5, label: 'India'}]
 
 class EditProfileCoc extends Component {
 
@@ -30,6 +30,9 @@ class EditProfileCoc extends Component {
               <form onSubmit={ handleSubmit(this.onSubmit.bind(this))} >
 
                 <div className="card" >
+                  <div className="card-header" >
+                    <p className="card-header-title" >CoC information</p>
+                  </div>
                   <div className="card-content" >
 
                     <div className="columns" >

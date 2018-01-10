@@ -17,11 +17,15 @@ class EditProfilePhone extends Component {
     this.state = {isLoading: false, step: 'get_phone'}
   }
 
+  changeStep = (step) => {
+      this.setState({step: step})
+  }
+
   renderSteps() {
 
     switch(this.state.step) {
       case 'get_phone':
-        return <EditProfilePhoneNumber changePhoneValidationStatus={ (step) => this.setState({step: step}) }  />
+        return <EditProfilePhoneNumber changePhoneValidationStatus={this.changeStep}  />
 
       case 'sending_phone':
         return <LoadingMessage />
@@ -30,11 +34,11 @@ class EditProfilePhone extends Component {
         return <LoadingMessage />
 
       case 'get_code':
-        return <EditProfilePhoneValidation changePhoneValidationStatus={ (step) => this.setState({step: step}) } />
+        return <EditProfilePhoneValidation changePhoneValidationStatus={this.changeStep} />
 
       case 'phone_validated':
 
-        this.props.updateProfile()
+        this.props.updateProfile(null, null, 'onboarding')
 
         return (
           <div className="notification is-success" >
@@ -43,7 +47,7 @@ class EditProfilePhone extends Component {
         )
 
       default:
-        return <EditProfilePhoneNumber changePhoneValidationStatus={ (step) => this.setState({step: step}) } />
+        return <EditProfilePhoneNumber changePhoneValidationStatus={this.changeStep} />
     }
   }
 

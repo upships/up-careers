@@ -23,8 +23,7 @@ class EditProfilePhoneNumber extends Component {
 
   onSubmit(values) {
 
-    const modeQueryParam = this.props.mode ? `?mode=${this.props.mode}` : ''
-    const url = `/api/profile/phone${modeQueryParam}`
+    const url = '/api/profile/phone'
 
     this.setState({isLoading: true})
     this.props.changePhoneValidationStatus('sending_phone')
@@ -33,7 +32,6 @@ class EditProfilePhoneNumber extends Component {
 
         response => {
           console.log(response.data)
-          this.setState({isLoading: false})
           this.props.changePhoneValidationStatus('get_code')
         },
         response => {
