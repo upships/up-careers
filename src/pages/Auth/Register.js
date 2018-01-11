@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Helmet } from 'react-helmet'
 import { Link, Redirect } from 'react-router-dom'
-import AppHeader from '../components/interface/header'
-import RegistrationForm from '../components/auth/register'
+import AppHeader from '../../components/interface/header'
+import RegistrationForm from '../../components/auth/register'
 
 class AccountRegister extends Component {
 
@@ -42,7 +42,7 @@ class AccountRegister extends Component {
                 <RegistrationForm />
 
                 <hr/>
-                
+
                 <p className="has-text-centered" >
                   Already have an account?<Link to="/account/signin"  >Click here to log in</Link>
                 </p>

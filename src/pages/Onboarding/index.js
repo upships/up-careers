@@ -9,7 +9,7 @@ import OnboardingSteps from './Steps'
 
 import EditProfilePersonal from '../../components/edit-profile/personal'
 import EditProfilePhone from '../../components/edit-profile/phone'
-import EditProfileCertificates from '../../components/edit-profile/certificates'
+import OnboardingCertificates from './Certificates'
 import OnboardingEducation from './Education'
 import EditProfileProfessional from '../../components/edit-profile/professional'
 import OnboardingSeafaring from './Seafaring'
@@ -31,11 +31,11 @@ class Onboarding extends Component {
       case 1:
         return <EditProfilePersonal mode="onboarding" />
       case 2:
-        return <OnboardingEducation mode="onboarding" />
+        return <OnboardingEducation />
       case 3:
         return <OnboardingSeafaring />
       case 4:
-        return <EditProfileCertificates mode="onboarding" />
+        return <OnboardingCertificates />
       case 5:
         return <EditProfileProfessional mode="onboarding" />
       default:

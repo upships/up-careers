@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
 import _ from 'lodash'
+import { connect } from 'react-redux'
 
 import EditProfileCoc from '../../components/edit-profile/coc'
 import EditProfileCoe from '../../components/edit-profile/coe'
 import EditProfileSeamanBook from '../../components/edit-profile/seaman-book'
 import EditProfileDp from '../../components/edit-profile/dp'
+import { advanceOnboarding } from '../../actions'
 
 const tabItems = [
   ['CoC'],
@@ -17,7 +19,6 @@ class OnboardingSeafaring extends Component {
 
   constructor(props)  {
       super(props)
-
       this.state = {activeTab: 0}
   }
 
@@ -85,11 +86,11 @@ class OnboardingSeafaring extends Component {
           {this.renderContent()}
         </div>
         <div className="content" >
-          <button className="button is-medium is-success" >Save and continue</button> 
+          <button className={`button is-link is-medium ${ this.state.isLoading ? 'is-loading' : null }` } onClick={this.props.advanceOnboarding} >Continue</button>
         </div>
       </div>
     )
   }
 }
 
-export default OnboardingSeafaring
+export default connect(null, {advanceOnboarding})(OnboardingSeafaring)

@@ -21,7 +21,7 @@ class OnboardingEducation extends Component {
         <div className="content" >
           <div className="field is-grouped">
             <div className="control">
-              <button className={`button is-link is-medium ${ this.state.isLoading ? 'is-loading' : null }` } onClick={() => this.props.updateProfile(null, () => {this.setState({isLoading: false})}, this.props.mode)} >Save information</button>
+              <button className={`button is-link is-medium ${ this.state.isLoading ? 'is-loading' : null }` } onClick={() => this.props.updateProfile(null, () => {this.setState({isLoading: false})}, 'onboarding')} >Save information</button>
             </div>
           </div>
         </div>

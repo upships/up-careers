@@ -1,4 +1,7 @@
 import axios from 'axios'
+import createHistory from 'history/createBrowserHistory'
+
+const history = createHistory()
 
 export const INITIAL_SETUP = 'INITIAL_SETUP'
 export const LOAD_JOBS = 'LOAD_JOBS'
@@ -101,6 +104,8 @@ export function authUser(values)  {
                 user: response.data,
                 values: values
               })
+
+              history.push('/')
             }
           )
       },
@@ -172,6 +177,10 @@ export function updateProfile(values, callback, mode = null) {
         }
     )
   }
+}
+
+export function advanceOnboarding() {
+  return updateProfile(null, null, 'onboarding')
 }
 
 export function addProfileItem(values, item, callback = null) {

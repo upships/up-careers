@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import {Helmet} from 'react-helmet'
 import { connect } from 'react-redux'
 import { Link, Redirect } from 'react-router-dom'
-import AppHeader from '../components/interface/header'
-import LoginForm from '../components/auth/login'
+import AppHeader from '../../components/interface/header'
+import LoginForm from '../../components/auth/login'
 
 class AccountLogin extends Component {
 

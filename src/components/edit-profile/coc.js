@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 
 import { FormInput, FormToggler, FormSelect, FormDate } from '../../components/interface/form-inputs'
 import { updateProfileCoc } from '../../actions'
+import InfoMessage from '../interface/info-message'
 
 const ranks = [{value:1, label: 'Master'},{value:2, label: 'Chief Mate'},{value:3, label: 'Second Mate'},{value:4, label: 'Third Mate'}]
 const countriesList = [{value: 1, label: 'Brazil'},{value: 2, label: 'United States'},{value: 3, label: 'Norway'},{value: 4, label: 'United Kingdom'},{value: 5, label: 'India'}]
@@ -16,6 +17,7 @@ class EditProfileCoc extends Component {
   }
 
   onSubmit(values) {
+
     this.setState({isLoading: false})
     this.props.updateProfileCoc(values, () => {this.setState({isLoading: false})}, this.props.mode)
   }
@@ -100,6 +102,9 @@ class EditProfileCoc extends Component {
                     <div className="field is-grouped">
                       <div className="control">
                         <button className={`button is-link is-medium ${ this.props.submitting ? 'is-loading' : null }` }>Save</button>
+                      </div>
+                      <div className="control">
+                        { this.props.submitSucceeded ? <InfoMessage type="is-success" icon="check" >CoC updated</InfoMessage> : null }
                       </div>
                     </div>
                   </div>

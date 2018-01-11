@@ -9,6 +9,7 @@
     "bulma-components": "0.0.5",
     "bulma-extensions": "^0.5.2",
     "flatpickr": "^4.1.4",
+    "history": "^4.7.2",
     "html-react-parser": "^0.4.1",
     "jquery": "^3.2.1",
     "lodash": "^4.17.4",
