@@ -11,7 +11,7 @@ import EditProfilePersonal from '../../components/edit-profile/personal'
 import EditProfilePhone from '../../components/edit-profile/phone'
 import OnboardingCertificates from './Certificates'
 import OnboardingEducation from './Education'
-import EditProfileProfessional from '../../components/edit-profile/professional'
+import OnboardingProfessional from './Professional'
 import OnboardingSeafaring from './Seafaring'
 
 class Onboarding extends Component {
@@ -37,7 +37,7 @@ class Onboarding extends Component {
       case 4:
         return <OnboardingCertificates />
       case 5:
-        return <EditProfileProfessional mode="onboarding" />
+        return <OnboardingProfessional />
       default:
         return <EditProfilePhone mode="onboarding" />
     }
