@@ -22,7 +22,7 @@ class OnboardingProfessional extends Component {
         <div className="content" >
           <div className="field is-grouped">
             <div className="control">
-              <AdvanceButton />
+              <AdvanceButton text="Complete registration" mode="finishOnboarding" />
             </div>
           </div>
         </div>

@@ -9,6 +9,7 @@ import WorkList from '../profile/work-list'
 
 const positionsList = [{value:1, label: 'Chief Officer'},{value:2, label: 'Master'},{value:3, label: 'Second Officer'},{value:4, label: '2nd Engineer'}]
 const shipsTypesList = [{value:1, label: 'Tanker'},{value:2, label: 'AHTS'},{value:3, label: 'PSV'},{value:4, label: 'Containership'}]
+const countriesList = [{value: 1, label: 'Brazil'},{value: 2, label: 'United States'},{value: 3, label: 'Norway'},{value: 4, label: 'United Kingdom'},{value: 5, label: 'India'}]
 
 class EditProfileWork extends Component {
 
@@ -20,7 +21,7 @@ class EditProfileWork extends Component {
   onSubmit(values) {
     this.setState({isLoading: false})
     this.props.addProfileItem(values, 'work', () => {this.setState({isLoading: false})}, this.props.mode)
-    this.props.reset()
+    //this.props.reset()
   }
 
   render()  {
@@ -33,7 +34,7 @@ class EditProfileWork extends Component {
               <div className="content" >
                 <div className="card" >
                   <div className="card-header" >
-                    <p className="card-header-title" >Add work</p>
+                    <p className="card-header-title" >Add work experience</p>
                   </div>
                   <div className="card-content" >
 
@@ -43,8 +44,8 @@ class EditProfileWork extends Component {
 
                         <div className="column" >
                           <Field
-                            name="position_id"
-                            label="Work *"
+                            name="work[basic][position_id]"
+                            label="Position *"
                             options={positionsList}
                             component={FormSelect}
                           />
@@ -52,7 +53,71 @@ class EditProfileWork extends Component {
 
                         <div className="column" >
                           <Field
-                            name="started_at"
+                            name="work[basic][company_name]"
+                            label="Company name"
+                            type="text"
+                            placeholder="Ex.: Bourbon Offshore"
+                            component={FormInput}
+                          />
+                        </div>
+
+                        <div className="column" >
+                          <Field
+                            name="work[basic][description]"
+                            label="Description"
+                            type="text"
+                            placeholder="Briefly describe your job"
+                            component={FormInput}
+                          />
+                        </div>
+                      </div>
+
+                      <div className="columns" >
+                        <div className="column" >
+                          <Field
+                            name="work[ship][ship_type_id]"
+                            label="Vessel type"
+                            options={shipsTypesList}
+                            component={FormSelect}
+                          />
+                        </div>
+
+                        <div className="column" >
+                          <Field
+                            name="work[ship][name]"
+                            label="Vessel name"
+                            type="text"
+                            placeholder="Ex.: Skandi Leblon"
+                            component={FormInput}
+                          />
+                        </div>
+
+                        <div className="column" >
+                          <Field
+                            name="work[basic][sailing_region]"
+                            label="Sailing region"
+                            type="text"
+                            placeholder="Ex. North Sea"
+                            component={FormInput}
+                          />
+                        </div>
+
+                      </div>
+
+                      <div className="columns" >
+
+                        <div className="column" >
+                          <Field
+                            name="work[basic][country_id]"
+                            label="Country"
+                            options={countriesList}
+                            component={FormSelect}
+                          />
+                        </div>
+
+                        <div className="column" >
+                          <Field
+                            name="work[basic][started_at]"
                             label="Start date"
                             type="text"
                             placeholder="Start date"
@@ -62,34 +127,14 @@ class EditProfileWork extends Component {
 
                         <div className="column" >
                           <Field
-                            name="ended_at"
+                            name="work[basic][ended_at]"
                             label="End date"
                             type="text"
                             placeholder="End date"
                             component={FormDate}
                           />
                         </div>
-                      </div>
 
-                      <div className="columns" >
-                        <div className="column" >
-                          <Field
-                            name="company_name"
-                            label="Company name"
-                            type="text"
-                            placeholder="Company name"
-                            component={FormInput}
-                          />
-                        </div>
-
-                        <div className="column" >
-                          <Field
-                            name="ship_type_id"
-                            label="Work *"
-                            options={shipsTypesList}
-                            component={FormSelect}
-                          />
-                        </div>
                       </div>
 
                       <div className="field is-grouped">

@@ -90,7 +90,6 @@ export function authUser(values)  {
           StorageUsed.setItem('isLoggedIn', true )
           StorageUsed.setItem('accessToken', response.data.access_token )
 
-
           axios.get('/api/user').then(
 
             response => {
@@ -179,8 +178,8 @@ export function updateProfile(values, callback, mode = null) {
   }
 }
 
-export function advanceOnboarding() {
-  return updateProfile(null, null, 'onboarding')
+export function advanceOnboarding(mode) {
+  return updateProfile(null, null, mode)
 }
 
 export function addProfileItem(values, item, callback = null) {

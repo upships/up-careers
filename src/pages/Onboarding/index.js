@@ -13,6 +13,7 @@ import OnboardingCertificates from './Certificates'
 import OnboardingEducation from './Education'
 import OnboardingProfessional from './Professional'
 import OnboardingSeafaring from './Seafaring'
+import OnboardingFinish from './Finish'
 
 class Onboarding extends Component {
 
@@ -38,6 +39,8 @@ class Onboarding extends Component {
         return <OnboardingCertificates />
       case 5:
         return <OnboardingProfessional />
+      case 10:
+        return <OnboardingFinish />
       default:
         return <EditProfilePhone mode="onboarding" />
     }
@@ -51,9 +54,9 @@ class Onboarding extends Component {
         return <LoadingMessage />
     }
 
-    if(profile.complete || profile.registration_step === 10)  {
-      return <Redirect to="/profile" />
-    }
+    // if(profile.complete || profile.registration_step === 10)  {
+    //   return <Redirect to="/profile" />
+    // }
 
     return (
       <section className="section" >
